@@ -119,7 +119,6 @@ func cleanCEP(cep string) string {
 func getLocationByCEP(cep string) (string, error) {
 	url := strings.ReplaceAll(viaCEPBaseURL, "%s", cep)
 
-	// Criar cliente HTTP com timeout
 	client := &http.Client{
 		Timeout: 10 * time.Second,
 	}
@@ -130,12 +129,10 @@ func getLocationByCEP(cep string) (string, error) {
 	}
 	defer resp.Body.Close()
 
-	// Verificar status da resposta
 	if resp.StatusCode != http.StatusOK {
 		return "", fmt.Errorf("ViaCEP retornou status %d", resp.StatusCode)
 	}
 
-	// Ler o corpo da resposta
 	bodyBytes, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return "", fmt.Errorf("erro ao ler resposta do ViaCEP: %w", err)
@@ -161,7 +158,6 @@ func getTemperatureByLocation(location string) (*TemperatureResponse, error) {
 	encodedLocation := url.QueryEscape(location)
 	url := fmt.Sprintf("%s?key=%s&q=%s&aqi=no", weatherAPIBaseURL, weatherAPIKey, encodedLocation)
 
-	// Criar cliente HTTP com timeout
 	client := &http.Client{
 		Timeout: 10 * time.Second,
 	}
