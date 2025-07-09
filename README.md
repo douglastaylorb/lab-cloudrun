@@ -1,14 +1,16 @@
-### Acessos
-Executar `docker compose up -d` para testar via docker
+## Acessos
+Executar `docker compose up -d` para testar via docker.
+
 Endereço para testar via cloudrun: https://lab-cloudrun-905306807446.us-central1.run.app/weather?cep=29108790
+
 
 #### Observação
 Substituir `weatherAPIKey` por uma API KEY válida para testes locais
 
-### Endpoint
+## Endpoint
 `GET /weather?cep={CEP}`
 
-### Exemplos de Uso
+## Exemplos de Uso
 
 #### Sucesso (CEP válido)
 ```bash
