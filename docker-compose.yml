@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  weather-api:
+    image: golang:1.24-alpine
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - "8080:8080"
+    command: sh -c "go mod download && go run ."
+    restart: unless-stopped
