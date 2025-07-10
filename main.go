@@ -52,7 +52,7 @@ type ErrorResponse struct {
 const (
 	viaCEPBaseURL     = "https://viacep.com.br/ws/%s/json/"
 	weatherAPIBaseURL = "http://api.weatherapi.com/v1/current.json"
-	weatherAPIKey     = "cole_sua_chave_aqui"
+	weatherAPIKey     = "sua_chave_aqui"
 )
 
 func main() {
@@ -87,18 +87,16 @@ func handleWeatherRequest(c echo.Context) error {
 
 	location, err := getLocationByCEP(cep)
 	if err != nil {
-		fmt.Printf("Erro ao buscar localização: %v\n", err)
 		if strings.Contains(err.Error(), "not found") {
 			return c.JSON(http.StatusNotFound, ErrorResponse{Message: "can not find zipcode"})
 		}
-		return c.JSON(http.StatusInternalServerError, ErrorResponse{Message: "Erro ao buscar localização"})
+		return c.JSON(http.StatusInternalServerError, ErrorResponse{Message: "can not find zipcode"})
 	}
 
 	fmt.Printf("Localização encontrada: %s\n", location)
 
 	temperature, err := getTemperatureByLocation(location)
 	if err != nil {
-		fmt.Printf("Erro ao buscar temperatura: %v\n", err)
 		return c.JSON(http.StatusInternalServerError, ErrorResponse{Message: "Erro ao buscar temperatura"})
 	}
 
